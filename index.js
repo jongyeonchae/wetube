@@ -3,6 +3,13 @@
 
 // babel 사용 위해 ES6 형식으로 JS 작성
 import express from "express";
+
+// [ morgan 불러오기 ]
+import morgan from "morgan";
+
+// [ helmet 불러오기 ]
+import helmet from "helmet";
+
 const app = express();
 
 const PORT = 4000;
@@ -17,22 +24,27 @@ const handleHome = (req, res) => res.send(`Hello from home`);
 // babel 사용 위해 ES6 형식으로 JS 작성
 const handleProfile = (req, res) => res.send(`You are on my profile`);
 
-// [ middleware 만들기 ]
-// express에서 route와 같이 connection을 담당하는 모든 것은, middleware일 때 key값으로 req, res, next 를 갖는다. next는 다음 함수로의 진입을 허락하는 역할을 한다.
-// middleware는 원하는 갯수만큼 만들 수 있다.
-const betweenHome = (req, res, next) => {
-    console.log("Between");
-    next();
-}
+// [ helmet 전체 middleware로 적용하기 ]
+// helmet: 보안 담당.
+app.use(helmet());
 
-// [ middleware 전체 route에 추가하기 ]
-app.use(betweenHome);
+// [ morgan 전체 middleware로 적용하기 ]
+// morgan: 로깅을 관리. tiny, dev, combined, common, short 을 옵션으로 제공.
+app.use(morgan("dev"));
+
+// [ middleware로 connection 끊기 ]
+// route 전에 middleware가 response를 하면 connection이 끊김
+/* const middlewareDisconnect = (req, res, next) => {
+  res.send("not happening");
+}; */
 
 // [ route 만들기 ]
 // GET 메서드(정보 가져오기)를 통해 메인 URL 접근 시 handleHome 실행
-app.get("/", betweenHome, handleHome);
-// [ middleware를 메인 페이지에만 추가 ] 
-//app.get("/", betweenHome, handleHome);
+app.get("/", handleHome);
+// [ middleware를 메인 페이지에만 추가하기 ]
+/* app.get("/", betweenHome, handleHome); */
+// [ middleware로 connection 끊기 ]
+/* app.get("/", middlewareDisconnect, handleHome); */
 
 app.get("/profile", handleProfile);
 
