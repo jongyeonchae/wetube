@@ -8,7 +8,9 @@
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "helmet": "^3.23.1",
+    "morgan": "^1.10.0"
   },
   "scripts": {
     "start": "nodemon --exec babel-node index.js --delay 2"
@@ -17,6 +19,3 @@
     "nodemon": "^2.0.4"
   }
 }
-
-
-//nodemon 실행 시, babel-node 때문에 중복 저장되는 것을 막기 위해, 2초 지연
