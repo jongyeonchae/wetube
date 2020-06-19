@@ -20,6 +20,8 @@ import videoRouter from "./routers/videoRouter";
 
 import globalRouter from "./routers/globalRouter";
 
+import routes from "./routes";
+
 const app = express();
 
 // [ helmet 전체 middleware로 적용하기 ]
@@ -36,12 +38,12 @@ app.use(morgan("dev"));
   res.send("not happening");
 }; */
 
-app.use("/", globalRouter);
-// [ userRouter import 하기 ]
-// use: /user 에 누군가가 방문하면, userRouter 전체를 활용하겠다는 의미
-app.use("/user", userRouter);
+// [ routes 명 변경하기 ]
+app.use(routes.home, globalRouter);
 
-app.use("/video", videoRouter);
+app.use(routes.users, userRouter);
+
+app.use(routes.videos, videoRouter);
 
 // [app 오브젝트 export 하기]
 // 다른 파일에서 import 요청 시, app 오브젝트 import 허용
