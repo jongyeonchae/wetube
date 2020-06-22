@@ -14,6 +14,8 @@ import cookieParser from "cookie-parser";
 
 import bodyParser from "body-parser";
 
+import { localsMiddleware } from "./middlewares";
+
 import routes from "./routes";
 
 import userRouter from "./routers/userRouter";
@@ -24,19 +26,21 @@ import globalRouter from "./routers/globalRouter";
 
 const app = express();
 
+// [ helmet 전체 middleware로 적용하기 ]
+// helmet: 보안 담당.
+app.use(helmet());
+
 // view
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// [ helmet 전체 middleware로 적용하기 ]
-// helmet: 보안 담당.
-app.use(helmet());
-
 // [ morgan 전체 middleware로 적용하기 ]
 // morgan: 로깅을 관리. tiny, dev, combined, common, short 을 옵션으로 제공.
 app.use(morgan("dev"));
+
+app.use(localsMiddleware);
 
 // [ middleware로 connection 끊기 ]
 // route 전에 middleware가 response를 하면 connection이 끊김
