@@ -2,4 +2,9 @@
 /* pug: express 의 view engine 으로 템플릿 언어임 */
 
 
-p Hello
+/* layout(main.pug)을 활용하기 위해 extend */
+extends layouts/main
+
+/* block 안에 아래의 코드를 overwrite */
+block content
+    p Hello 
