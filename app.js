@@ -10,9 +10,9 @@ import morgan from "morgan";
 // [ helmet 불러오기 ]
 import helmet from "helmet";
 
-/*import cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 
-import bodyParser from "body-parser";*/
+import bodyParser from "body-parser";
 
 import userRouter from "./routers/userRouter";
 
@@ -23,6 +23,10 @@ import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 
 const app = express();
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // [ helmet 전체 middleware로 적용하기 ]
 // helmet: 보안 담당.
