@@ -1,10 +1,11 @@
 doctype html
 html
     head
+        script(src="https://kit.fontawesome.com/21dbcf0f70.js", crossorigin="anonymous")
         title #{pageTitle} | #{siteName}
     body
         include ../partials/header
         main
             block content
-        /* [ partials 를 통한 footer import ]    
+        //- [ partials 를 통한 footer import ]    
         include ../partials/footer

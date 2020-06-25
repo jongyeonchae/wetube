@@ -1,5 +1,6 @@
-/* pug 클래스명 설정: .클래스명 */
-footer.footer 
-    /* fontawesome 추가 필요 */
-    /* #{}: pug 안에 js 삽입 */
+//- pug 클래스명 설정: .클래스명
+footer.footer
+    .footer__icon
+        i.fab.fa-youtube
+    //- #{}: pug 안에 js 삽입
     span.footer__text #{siteName} #{new Date().getFullYear()} &copy;  
