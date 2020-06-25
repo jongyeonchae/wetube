@@ -13,7 +13,7 @@ const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
 
 // videos URL
-const VIDEO = "/videos";
+const VIDEOS = "/videos";
 const VIDEO_DETAIL = "/:id";
 const UPLOAD = "/upload";
 const EDIT_VIDEO = "/:id/edit";
@@ -30,7 +30,7 @@ const routes = {
   userDetail: USER_DETAIL,
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
-  videos: VIDEO,
+  videos: VIDEOS,
   upload: UPLOAD,
   videoDetail: VIDEO_DETAIL,
   editVideo: EDIT_VIDEO,

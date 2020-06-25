@@ -30,7 +30,7 @@ const app = express();
 // helmet: 보안 담당.
 app.use(helmet());
 
-// view
+// [ pug를 view engine으로 설정하기 ]
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json());
