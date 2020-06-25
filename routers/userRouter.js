@@ -9,8 +9,9 @@ import {
 
 const userRouter = express.Router();
 
-userRouter.get(routes.userDetail, userDetail);
+// editProfile 호출 시 userDetail의 id로 인식하는 문제 해결위해, 위치 변경
 userRouter.get(routes.editProfile, editProfile);
+userRouter.get(routes.userDetail, userDetail);
 userRouter.get(routes.changePassword, changePassword);
 
 export default userRouter;
