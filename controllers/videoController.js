@@ -1,11 +1,7 @@
-import { videos } from "../db";
-
 // [ pug 적용하기: .render("pug 파일명") ]
 // render 함수의 두번째 인자: 템플릿에 추가할 정보가 담긴 객체. { pageTitle: "Home" }을 삽입하여 특정 템플릿에만 변수 적용
-// [ fake data 불러오기 ]
-export const home = (req, res) => {
-  res.render("home", { pageTitle: "Home", videos });
-};
+export const home = (req, res) => res.render("home", { pageTitle: "Home" });
+
 // [ 사용자가 입력한 정보(query) 가져오기 ]
 export const search = (req, res) => {
   // const searchingBy = req.query.term;
