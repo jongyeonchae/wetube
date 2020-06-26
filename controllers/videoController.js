@@ -15,7 +15,7 @@ export const search = (req, res) => {
   } = req;
   // [ searchingBy 값 전달 ]
   // ES6 코딩 방식으로 인해, searchingBy: searchingBy 코드는 searchingBy 와 동일
-  res.render("search", { pageTitle: "Search", searchingBy });
+  res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
 export const upload = (req, res) =>

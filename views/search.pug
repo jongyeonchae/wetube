@@ -1,5 +1,14 @@
 extends layouts/main
+//- [ mixin 으로 search 기능 설정 ]
+include mixins/videoBlock
 
 block content
     .search__header
         h3 Searching for #{searchingBy}
+    .search__videos
+        each potato in videos
+            +videoBlock({
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.videoFile
+            })
