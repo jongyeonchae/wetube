@@ -1,4 +1,5 @@
 import { videos } from "../db";
+import routes from "../routes";
 
 // [ pug 적용하기: .render("pug 파일명") ]
 // render 함수의 두번째 인자: 템플릿에 추가할 정보가 담긴 객체. { pageTitle: "Home" }을 삽입하여 특정 템플릿에만 변수 적용
@@ -18,8 +19,18 @@ export const search = (req, res) => {
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
-export const upload = (req, res) =>
+export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
+
+export const postUpload = (req, res) => {
+  const {
+    body: { file, title, description },
+  } = req;
+  // To Do: Upload and save video
+  // 업로드한 비디오(id:324393) 상세 화면으로 진입
+  res.redirect(routes.videoDetail(324393));
+};
+
 export const videoDetail = (req, res) =>
   res.render("videoDetail", { pageTitle: "Video Detail" });
 export const editVideo = (req, res) =>
