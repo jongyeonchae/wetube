@@ -3,6 +3,8 @@
 //- videoBlock이라는 mixin 함수에 video 라는 객체를 제공. video 객체 중 설정하고 싶은 key값(videoFile, title, views) 을 지정.
 mixin videoBlock(video = {})
     .videoBlock
-        video.videoBlock__thumnail(src=video.videoFile, controls=true)
-        h4.videoBlock__title=video.title
-        h6.videoBlock__views=video.views
+        //- video 클릭 시, videoDetail 페이지로 이동
+        a(href=routes.videoDetail(video.id))
+            video.videoBlock__thumnail(src=video.videoFile, controls=true)
+            h4.videoBlock__title=video.title
+            h6.videoBlock__views=video.views
