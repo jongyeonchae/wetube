@@ -1,4 +1,3 @@
-import { videos } from "../db";
 import routes from "../routes";
 
 // [ pug 적용하기: .render("pug 파일명") ]
