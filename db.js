@@ -1,10 +1,14 @@
 // mongo db 연결
 import mongoose from "mongoose";
+// dotenv 모든 변수 불러오기
+import dotenv from "dotenv";
+dotenv.config();
 
 // [ db 연결 주소 입력하기 ]
 // url 작성법: 'mongodb://localhost:포트번호/db명'
 // useNewUrlParser, useFindAndModify: Mongoose 가 요청하는 기본 설정
-mongoose.connect("mongodb://localhost:27017/we-tube", {
+// 'process.env.KEY값'으로 MONGO_URL 호출
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useFindAndModify: false,
 });
