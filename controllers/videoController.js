@@ -1,10 +1,20 @@
 import routes from "../routes";
+import Video from "../models/Video";
 
 // [ pug 적용하기: .render("pug 파일명") ]
 // render 함수의 두번째 인자: 템플릿에 추가할 정보가 담긴 객체. { pageTitle: "Home" }을 삽입하여 특정 템플릿에만 변수 적용
 // [ fake data 불러오기 ]
-export const home = (req, res) => {
-  res.render("home", { pageTitle: "Home", videos });
+// [ async 를 활용하여 video define 하기 ]
+// * async 함수: 함수 내 코드가 모두 수행될 때까지 아래 코드를 수행하지 않고 기다림(await)
+// * try, catch 를 통해 error 를 handle
+export const home = async (req, res) => {
+  try {
+    const videos = await Video.find({});
+    res.render("home", { pageTitle: "Home", videos });
+  } catch (error) {
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos: [] });
+  }
 };
 // [ 사용자가 입력한 정보(query) 가져오기 ]
 export const search = (req, res) => {
