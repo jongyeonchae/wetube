@@ -32,12 +32,12 @@ export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 
 export const postUpload = (req, res) => {
-  const {
-    body: { file, title, description },
-  } = req;
+  const { body, file } = req;
+  console.log(body, file);
   // To Do: Upload and save video
+  res.render("upload", { pageTitle: "Upload" });
   // 업로드한 비디오(id:324393) 상세 화면으로 진입
-  res.redirect(routes.videoDetail(324393));
+  // res.redirect(routes.videoDetail(324393));
 };
 
 export const videoDetail = (req, res) =>
