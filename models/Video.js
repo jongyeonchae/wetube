@@ -24,6 +24,16 @@ const VideoSchema = new mongoose.Schema({
     // Date.now 함수를 실행하여 날짜 조회
     default: Date.now,
   },
+  // [ data relationship 설정 - 2 ]
+  // video에 연결시킬 comment 목록 불러오기
+  // type: 연결시킬 매개체(id) 설정
+  // ref: 연결시킬 comment model명 입력
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 
 // [ model 생성 ]
