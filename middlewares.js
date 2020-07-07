@@ -1,4 +1,9 @@
+// multer: 파일 저장 및 저장된 url 제공
+import multer from "multer";
 import routes from "./routes";
+
+// upload video를 서버("videos/")에 저장
+const multerVideo = multer({ dest: "videos/" });
 
 // [ res.locals 로 전역(global) 변수 만들기 ]
 export const localsMiddleware = (req, res, next) => {
@@ -10,3 +15,6 @@ export const localsMiddleware = (req, res, next) => {
   };
   next();
 };
+
+// single("파일명"): file 1개(파일명)만 upload 됨을 알림
+export const uploadVideo = multerVideo.single("videoFile");
