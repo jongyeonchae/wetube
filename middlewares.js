@@ -3,7 +3,8 @@ import multer from "multer";
 import routes from "./routes";
 
 // upload video를 서버("videos/")에 저장
-const multerVideo = multer({ dest: "videos/" });
+// "/uploads"라고 작성하면 하드디스크에 저장하므로 주의
+const multerVideo = multer({ dest: "uploads/videos/" });
 
 // [ res.locals 로 전역(global) 변수 만들기 ]
 export const localsMiddleware = (req, res, next) => {
