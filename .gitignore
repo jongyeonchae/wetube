@@ -143,3 +143,5 @@ package-lock.json
 
 # dotenv environment variable file
 .env
+
+uploads
