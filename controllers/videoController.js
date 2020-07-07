@@ -31,13 +31,19 @@ export const search = (req, res) => {
 export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 
-export const postUpload = (req, res) => {
-  const { body, file } = req;
-  console.log(body, file);
-  // To Do: Upload and save video
-  res.render("upload", { pageTitle: "Upload" });
-  // 업로드한 비디오(id:324393) 상세 화면으로 진입
-  // res.redirect(routes.videoDetail(324393));
+// multer를 통해 upload 한 비디오 path 확인 후, 새로운 비디오로 등록
+export const postUpload = async (req, res) => {
+  const {
+    body: { title, description },
+    file: { path },
+  } = req;
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title,
+    description,
+  });
+  console.log(newVideo);
+  res.redirect(routes.videoDetail(newVideo.id));
 };
 
 export const videoDetail = (req, res) =>
