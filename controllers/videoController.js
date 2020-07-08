@@ -9,7 +9,8 @@ import Video from "../models/Video";
 // * try, catch 를 통해 error 를 handle
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+    // 비디오 정렬 순서를 최신순으로 바꾸기 위해, 정렬순서를 기존과 반대로 바꿈
+    const videos = await Video.find({}).sort({ _id: -1 });
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
@@ -25,7 +26,7 @@ export const search = (req, res) => {
   } = req;
   // [ searchingBy 값 전달 ]
   // ES6 코딩 방식으로 인해, searchingBy: searchingBy 코드는 searchingBy 와 동일
-  res.render("search", { pageTitle: "Search", searchingBy, videos });
+  res.render("search", { pageTitle: "Search", searchingBy });
 };
 
 export const getUpload = (req, res) =>
@@ -93,6 +94,8 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     await Video.findOneAndRemove({ _id: id });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   res.redirect(routes.home);
 };
