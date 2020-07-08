@@ -46,8 +46,20 @@ export const postUpload = async (req, res) => {
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
-export const videoDetail = (req, res) =>
-  res.render("videoDetail", { pageTitle: "Video Detail" });
+// [ URL에서 정보 가져오기 ]
+// *routes 에서 `:id` 로 변수임을 표기했기에, params 가 id 값을 노출
+export const videoDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    res.render("videoDetail", { pageTitle: "Video Detail", video });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
 export const editVideo = (req, res) =>
   res.render("editVideo", { pageTitle: "Edit Video" });
 export const deleteVideo = (req, res) =>
