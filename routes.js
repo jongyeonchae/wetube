@@ -7,7 +7,7 @@ const SEARCH = "/search";
 
 // users URL
 const USERS = "/users";
-//:표기는 expressJS에게 변할 수 있음을 얄림
+// :표기는 expressJS에게 변할 수 있음을 얄림
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
