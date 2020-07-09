@@ -17,8 +17,9 @@ export const home = async (req, res) => {
     res.render("home", { pageTitle: "Home", videos: [] });
   }
 };
+
 // [ 사용자가 입력한 정보(query) 가져오기 ]
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // const searchingBy = req.query.term;
   // ES6 이전 코딩방식으로, 아래 코드와 동일
   const {
@@ -26,7 +27,17 @@ export const search = (req, res) => {
   } = req;
   // [ searchingBy 값 전달 ]
   // ES6 코딩 방식으로 인해, searchingBy: searchingBy 코드는 searchingBy 와 동일
-  res.render("search", { pageTitle: "Search", searchingBy });
+  let videos = [];
+  // $regex: 정규표현식
+  // $options: "i"에서 i는 insensitive (대소문자 구분하지 않음을 의미)
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
 export const getUpload = (req, res) =>
