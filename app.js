@@ -35,6 +35,7 @@ app.set("view engine", "pug");
 // [ uploads route 설정 ]
 // express.static(디렉토리명): 디렉토리에서 (정적) 파일을 찾아주는 built-in middleware
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

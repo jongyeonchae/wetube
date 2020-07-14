@@ -3,9 +3,12 @@ html
     head
         script(src="https://kit.fontawesome.com/21dbcf0f70.js", crossorigin="anonymous")
         title #{pageTitle} | #{siteName}
+        link(rel="stylesheet", href="/static/styles.css")
     body
         include ../partials/header
         main
             block content
         //- [ partials 를 통한 footer import ]    
         include ../partials/footer
+        //- dev:assets 가 파일 변화를 상시 확인하여 리셋하기 위해, 파일 불러옴
+        script(src="/static/main.js")
