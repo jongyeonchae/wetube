@@ -13,10 +13,19 @@ const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_DIR = path.join(__dirname, "static");
 
 const config = {
-  entry: ENTRY_FILE,
+  // babel/polyfill: 브라우저에 내장되지 않은 기능(eg. regenerator runtime) 지원
+  entry: ["@babel/polyfill", ENTRY_FILE],
   mode: MODE,
   module: {
     rules: [
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: "babel-loader",
+          },
+        ],
+      },
       {
         // /\.(scss)$/: 정규표현식으로 scss 파일 찾기
         test: /\.(scss)$/,
@@ -28,7 +37,7 @@ const config = {
           {
             loader: "postcss-loader",
             options: {
-              plugin() {
+              plugins() {
                 return [autoprefixer({ browers: "cover 99.5%" })];
               },
             },
