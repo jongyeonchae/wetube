@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 // dotenv 모든 변수 불러오기
 import dotenv from "dotenv";
+
 dotenv.config();
 
 // [ db 연결 주소 입력하기 ]
@@ -17,7 +18,7 @@ const db = mongoose.connection;
 
 const handleOpen = () => console.log("✅  Connected to DB");
 const handleError = (error) =>
-  console.log("❌  Error on DB Connection:${error}");
+  console.log(`❌ Error on DB Connection:${error}`);
 
 // db에 연결된 시점(once)에 handleOpen 실행
 db.once("open", handleOpen);
