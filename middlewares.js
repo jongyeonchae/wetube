@@ -11,7 +11,8 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "Wetube";
   res.locals.routes = routes;
   res.locals.user = {
-    isAuthenticated: true,
+    // form.scss 작업 시, 모든 form 을 확인하기 위해 authentication false 로 설정
+    isAuthenticated: false,
     id: 1,
   };
   next();
