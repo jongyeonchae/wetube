@@ -12,6 +12,6 @@ const UserSchema = new mongoose.Schema({
 // configuration 객체의 설정을 통해, 사용자가 입력한 email을 username 으로 인식
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 
-const model = mongoose.Model("User", UserSchema);
+const model = mongoose.model("User", UserSchema);
 
 export default model;
