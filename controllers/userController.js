@@ -1,11 +1,12 @@
 import routes from "../routes";
+import User from "../models/User";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
 
 // 로그인 이후 화면을 위해, postJoin 함수를 새로 생성
-export const postJoin = (req, res) => {
+export const postJoin = async (req, res) => {
   // 사용자가 입력한 키값(name, email 등)을 확인하고, 비밀번호가 일치 여부에 따라 다른 반응(res)
   const {
     body: { name, email, password, password2 },
@@ -16,6 +17,15 @@ export const postJoin = (req, res) => {
     res.render("join", { pageTitle: "Join" });
   } else {
     // To Do: Register User
+    try {
+      const user = await User({
+        name,
+        email,
+      });
+      await User.register(user, password);
+    } catch (error) {
+      console.log(error);
+    }
     // To Do: Log User In
     res.redirect(routes.home);
   }
