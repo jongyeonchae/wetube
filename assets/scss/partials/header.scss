@@ -1,5 +1,6 @@
 // scss 파일은 selector 안에 selector 를 포함할 수 있다
 // &: 상위요소 치환으로, 현재 속성을 설정중인 셀렉터를 의미함
+
 .header {
   background-color: $red;
   margin-bottom: 50px;
@@ -41,6 +42,7 @@
           font-size: 14px;
           color: $black;
           font-weight: 600;
+          max-width: none;
           &::placeholder {
             font-weight: 300;
             color: rgba(0, 0, 0, 0.7);
