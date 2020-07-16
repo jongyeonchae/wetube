@@ -5,12 +5,11 @@
 //- layout(main.pug)을 활용하기 위해 extend 
 extends layouts/main
 //- [ videoBlock 설정하기 ]
-include mixins/videoBlock
-
+include mixins/videoBlock 
 
 //- block 안에 아래의 코드를 overwrite
 block content
-    .videos
+    .home-videos
         //- [ videos 배열 노출 ]
         each potato in videos
             +videoBlock({
@@ -19,3 +18,70 @@ block content
                 views: potato.views,
                 videoFile: potato.fileUrl
             })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+            +videoBlock({
+                id: potato.id,
+                title: potato.title,
+                views: potato.views,
+                videoFile: potato.fileUrl
+            })
+

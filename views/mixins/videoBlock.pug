@@ -5,6 +5,10 @@ mixin videoBlock(video = {})
     .videoBlock
         //- video 클릭 시, videoDetail 페이지로 이동
         a(href=routes.videoDetail(video.id))
-            video.videoBlock__thumnail(src=video.videoFile, controls=true)
+            video.videoBlock__thumnail(src=video.videoFile, controls=false)
             h4.videoBlock__title=video.title
-            h6.videoBlock__views=video.views
+            if video.views === 1
+                h6.videoBlock__views 1 view
+            else
+                h6.videoBlock__views #{video.views} views
+
