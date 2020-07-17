@@ -14,6 +14,8 @@ import cookieParser from "cookie-parser";
 
 import bodyParser from "body-parser";
 
+import passport from "passport";
+
 import { localsMiddleware } from "./middlewares";
 
 import routes from "./routes";
@@ -23,6 +25,8 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
 import globalRouter from "./routers/globalRouter";
+
+import "./passport";
 
 const app = express();
 
@@ -43,6 +47,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // [ morgan 전체 middleware로 적용하기 ]
 // morgan: 로깅을 관리. tiny, dev, combined, common, short 을 옵션으로 제공.
 app.use(morgan("dev"));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(localsMiddleware);
 

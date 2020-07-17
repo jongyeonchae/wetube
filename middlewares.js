@@ -10,11 +10,8 @@ const multerVideo = multer({ dest: "uploads/videos/" });
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "Wetube";
   res.locals.routes = routes;
-  res.locals.user = {
-    // form.scss 작업 시, 모든 form 을 확인하기 위해 authentication false 로 설정
-    isAuthenticated: false,
-    id: 1,
-  };
+  // 로그인 시, passport 가 쿠키, serialize, deserialize를 처리하고, user가 담긴 object를 request 할 것이므로 req.user 로 변경
+  res.locals.user = req.user || {};
   next();
 };
 

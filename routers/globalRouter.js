@@ -15,7 +15,7 @@ const globalRouter = express.Router();
 
 // [ Controller 파일 적용하기 ]
 globalRouter.get(routes.join, getJoin);
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, postJoin, postLogin);
 
 // [ Controller 파일 적용하기 ]
 globalRouter.get(routes.login, getLogin);
