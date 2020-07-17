@@ -16,7 +16,11 @@ import bodyParser from "body-parser";
 
 import passport from "passport";
 
+import mongoose from "mongoose";
+
 import session from "express-session";
+
+import MongoStore from "connect-mongo";
 
 import { localsMiddleware } from "./middlewares";
 
@@ -31,6 +35,8 @@ import globalRouter from "./routers/globalRouter";
 import "./passport";
 
 const app = express();
+
+const CookieStore = MongoStore(session);
 
 // [ helmet 전체 middleware로 적용하기 ]
 // helmet: 보안 담당.
@@ -55,6 +61,8 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
+    // session 정보를 CookieStore 에 저장하여, 새로고침하여도 로그인 정보가 휘발되지 않도록 함
+    store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
 
