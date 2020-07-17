@@ -12,8 +12,24 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.routes = routes;
   // 로그인 시, passport 가 쿠키, serialize, deserialize를 처리하고, user가 담긴 object를 request 할 것이므로 req.user 로 변경
   res.locals.user = req.user || null;
-  console.log(req.user);
   next();
+};
+
+// 로그인한 경우, join 페이지로의 진입을 막음
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPrivate = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
 };
 
 // single("파일명"): file 1개(파일명)만 upload 됨을 알림
