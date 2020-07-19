@@ -2,18 +2,21 @@ import passport from "passport";
 import GithubStrategy from "passport-github";
 import User from "./models/User";
 import { githubLoginCallback } from "./controllers/userController";
+import routes from "./routes";
 
 // Strategy: 로그인하는 방식으로, email 로그인, socialLogin 등이 해당됨
 passport.use(User.createStrategy());
 
 // github 로그인 인증을 위해, github에 사용자(application) 정보를 주고 받기 위한 설정
 passport.use(
-  new GithubStrategy({
-    clientID: process.env.GH_ID,
-    clientSecret: process.env.GH_SECRET,
-    callbackURL: "http://localhost:4000/auth/github/callback",
-  }),
-  githubLoginCallback
+  new GithubStrategy(
+    {
+      clientID: process.env.GH_ID,
+      clientSecret: process.env.GH_SECRET,
+      callbackURL: `http://localhost:4000${routes.githubCallback}`,
+    },
+    githubLoginCallback
+  )
 );
 
 // serialization: 쿠키에게 전달하는 정보로, 클라이언트가 받게 될 정보(eg. user.id)를 의미
