@@ -19,6 +19,10 @@ const UPLOAD = "/upload";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
+// Github
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
+
 // routes 오브젝트 생성
 const routes = {
   home: HOME,
@@ -66,6 +70,8 @@ const routes = {
       return DELETE_VIDEO;
     }
   },
+  gitHub: GITHUB,
+  githubCallback: GITHUB_CALLBACK,
 };
 
 export default routes;
