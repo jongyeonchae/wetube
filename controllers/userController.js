@@ -43,8 +43,14 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
 });
 
+// github에서 사용자 정보를 가져왔을 때, 실행되는 함수
+export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
+  console.log(accessToken, refreshToken, profile, cb);
+};
+
 export const logout = (req, res) => {
   // To Do: Process Log Out
+  req.logout();
   res.redirect(routes.home);
 };
 
