@@ -49,7 +49,7 @@ export const githubLogin = passport.authenticate("github");
 export const githubLoginCallback = async (_, __, profile, cb) => {
   // 로그인 인증을 위해, profile 내 json 정보(id, avatar_url, name, email)를 확인
   const {
-    _json: { id, avatar_url, name, email },
+    _json: { id, avatar_url: avatarUrl, name, email },
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -64,7 +64,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       githubId: id,
-      avtarUrl: avatar_url,
+      avatarUrl,
     });
     return cb(null, newUser);
   } catch (error) {
@@ -80,6 +80,11 @@ export const logout = (req, res) => {
   // To Do: Process Log Out
   req.logout();
   res.redirect(routes.home);
+};
+
+// req.user 는 로그인된 user 를 지칭
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "User Details", user: req.user });
 };
 
 export const userDetail = (req, res) =>
