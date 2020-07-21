@@ -56,6 +56,8 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     // email이 같은 user를 찾았다면, 해당 user의 githubId 를 id로 업데이트
     if (user) {
       user.githubId = id;
+      user.avatarUrl = avatarUrl;
+      user.name = name;
       user.save();
       return cb(null, user);
       // email 이 같은 user를 못찾았다면, 새로운 user 생성
@@ -76,6 +78,21 @@ export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
+export const facebookLogin = passport.authenticate("facebook");
+
+export const facebookLoginCallback = (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  console.log(accessToken, refreshToken, profile, cb);
+};
+
+export const postFacebookLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const logout = (req, res) => {
   // To Do: Process Log Out
   req.logout();
@@ -87,8 +104,18 @@ export const getMe = (req, res) => {
   res.render("userDetail", { pageTitle: "User Details", user: req.user });
 };
 
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Details" });
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Details", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (req, res) =>
