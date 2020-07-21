@@ -28,7 +28,10 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: `http://localhost:4000${routes.facebookCallback}`,
+      // callbackURL 에 https 를 적용하기 위해 ngrok 주소 사용
+      callbackURL: `https://cbbf2280ce94.ngrok.io${routes.facebookCallback}`,
+      profileFields: ["id", "displayName", "photos", "email"],
+      scope: ["public_profile", "email"],
     },
     facebookLoginCallback
   )
