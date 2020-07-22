@@ -1,20 +1,8 @@
-//- extends layouts/main
-
-//- block content
-//-     .form-container
-//-         //- video.id: 함수가 아닌 특정 비디오에 대한 명확한 경로를 지정하기 위함
-//-         form(action=routes.editVideo(video.id), method="post")
-//-             input(type="text", placeholder="Title", name="title", value=video.title)
-//-             textarea(name="description", placeholder="Description")=video.description
-//-             input(type="submit", value="Update Video")
-//-         a.form-container__link(href=routes.deleteVideo(video.id)) 
-//-             button.delete Delete Video
-
-
 extends layouts/main
 
 block content
     .form-container
+        //- video.id: 함수가 아닌 특정 비디오에 대한 명확한 경로를 지정하기 위함
         form(action=routes.editVideo(video.id), method="post")
             input(type="text", placeholder="Title", name="title", value=video.title)
             textarea(name="description", placeholder="Description")=video.description
