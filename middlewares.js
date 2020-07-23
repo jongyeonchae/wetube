@@ -6,6 +6,8 @@ import routes from "./routes";
 // "/uploads"라고 작성하면 하드디스크에 저장하므로 주의
 const multerVideo = multer({ dest: "uploads/videos/" });
 
+const multerAvatar = multer({ dest: "uploads/avatars/" });
+
 // [ res.locals 로 전역(global) 변수 만들기 ]
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "Wetube";
@@ -34,3 +36,5 @@ export const onlyPrivate = (req, res, next) => {
 
 // single("파일명"): file 1개(파일명)만 upload 됨을 알림
 export const uploadVideo = multerVideo.single("videoFile");
+
+export const uploadAvatar = multerAvatar.single("avatar");
