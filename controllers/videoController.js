@@ -53,7 +53,11 @@ export const postUpload = async (req, res) => {
     fileUrl: path,
     title,
     description,
+    creator: req.user.id,
   });
+  // 새로 업로드한 비디오(newVideo)의 id 를 user의 videos 배열에 추가
+  req.user.videos.push(newVideo.id);
+  req.user.save();
   console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo.id));
 };
@@ -65,7 +69,8 @@ export const videoDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const video = await Video.findById(id);
+    // populate: ObjectId 로 되어있는 것을 실제 데이터로 치환해주는 기능
+    const video = await Video.findById(id).populate(`creator`);
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
@@ -79,7 +84,12 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    if (video.creator !== req.user.id) {
+      // try 구문 내에서 throw Error() 실행 시, catch (error) 로 이동
+      throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -104,7 +114,13 @@ export const deleteVideo = async (req, res) => {
     params: { id },
   } = req;
   try {
-    await Video.findOneAndRemove({ _id: id });
+    const video = await Video.findById(id);
+    if (video.creator !== req.user.id) {
+      // try 구문 내에서 throw Error() 실행 시, catch (error) 로 이동
+      throw Error();
+    } else {
+      await Video.findOneAndRemove({ _id: id });
+    }
   } catch (error) {
     console.log(error);
   }
