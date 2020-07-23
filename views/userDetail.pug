@@ -7,7 +7,7 @@ block content
             img.u-avatar(src=user.avatarUrl)
             h4.profile__username=user.name
         //- view 가 확인한 user.id 와 login된 user의 id가 같을 때에만 버튼을 노출
-        if user.id === loggedUser.id
+        if loggedUser && user.id === loggedUser.id
             .user-profile__btns
                 a(href=`/users${routes.editProfile}`)
                     button ✏️  Edit Profile
