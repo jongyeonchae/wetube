@@ -32,6 +32,8 @@ import videoRouter from "./routers/videoRouter";
 
 import globalRouter from "./routers/globalRouter";
 
+import apiRouter from "./routers/apiRouter";
+
 import "./passport";
 
 const app = express();
@@ -83,6 +85,8 @@ app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 
 app.use(routes.videos, videoRouter);
+
+app.use(routes.api, apiRouter);
 
 // [app 오브젝트 export 하기]
 // 다른 파일에서 import 요청 시, app 오브젝트 import 허용
