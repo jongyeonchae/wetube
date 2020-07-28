@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 // [ pug 적용하기: .render("pug 파일명") ]
 // render 함수의 두번째 인자: 템플릿에 추가할 정보가 담긴 객체. { pageTitle: "Home" }을 삽입하여 특정 템플릿에만 변수 적용
@@ -70,7 +71,9 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     // populate: ObjectId 로 되어있는 것을 실제 데이터로 치환해주는 기능
-    const video = await Video.findById(id).populate(`creator`);
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
@@ -127,7 +130,7 @@ export const deleteVideo = async (req, res) => {
   res.redirect(routes.home);
 };
 
-export const registerView = async (req, res) => {
+export const postRegisterView = async (req, res) => {
   const {
     params: { id },
   } = req;
@@ -136,6 +139,27 @@ export const registerView = async (req, res) => {
     video.views += 1;
     video.save();
     res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postAddComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { comment },
+    user,
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const newComment = await Comment.create({
+      text: comment,
+      creator: user.id,
+    });
+    video.comments.push(newComment.id);
+    video.save();
   } catch (error) {
     res.status(400);
   } finally {
