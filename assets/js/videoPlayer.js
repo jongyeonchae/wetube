@@ -7,6 +7,15 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 
+// API 를 활용하여 페이지 렌더링 없이 view 를 세기 위해 registerView() 생성
+// database를 변경해야 하므로, post 방식으로 req
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/view`, {
+    method: "POST",
+  });
+};
+
 function handlePlayClick() {
   // HTMLMediaElement 참고
   if (videoPlayer.paused) {
@@ -91,6 +100,7 @@ function setTotalTime() {
 }
 
 function handleEnded() {
+  registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = `<i class="fas fa-play"></i>`;
 }
