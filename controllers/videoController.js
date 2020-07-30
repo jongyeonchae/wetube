@@ -45,13 +45,14 @@ export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 
 // multer를 통해 upload 한 비디오 path 확인 후, 새로운 비디오로 등록
+// multer 가 S3를 통해 외부에 파일을 저장하는 경우, path 가 아닌 location 에 저장
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path },
+    file: { location },
   } = req;
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id,

@@ -147,7 +147,7 @@ export const postEditProfile = async (req, res) => {
       name,
       email,
       // avatarUrl: (새로 업로드한)file 이 있다면 file.path 로 지정하고, 없다면 로그인한 user 의 avatarUrl 을 그대로 사용
-      avatarUrl: file ? file.path : req.user.avatarUrl,
+      avatarUrl: file ? file.location : req.user.avatarUrl,
     });
     res.redirect(routes.me);
   } catch (error) {
